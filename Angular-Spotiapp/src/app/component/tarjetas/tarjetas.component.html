@@ -1,0 +1,10 @@
+<div class="card-columns">
+    <div *ngFor="let album of albums" class="card">
+      <img [src]="album.images | noimage" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"> {{ album.name }} <small>{{album.release_date }}</small> </h5>
+        <span *ngFor="let artista of album.artists" class="badge badge-pill badge-success"> {{ artista.name }} </span>
+        <small class="card-text"> {{ album.release_data }} </small>
+    </div>
+    </div>
+</div>    

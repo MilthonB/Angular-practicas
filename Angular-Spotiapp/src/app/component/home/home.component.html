@@ -1,0 +1,12 @@
+<app-loading *ngIf="loading" ></app-loading>
+
+<div class="card-columns animated fadeIn m-5">
+    <div  *ngFor="let album of nuevasCanciones" class="card puntero">
+      <img [src]="album.images | noimage" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"> {{ album.name }} <small>{{album.release_date }}</small> </h5>
+        <span (click)="verArtista(artista.id)" *ngFor="let artista of album.artists" class="badge badge-pill badge-success"> {{ artista.name }} </span>
+        <small class="card-text"> {{ album.release_data }} </small>
+    </div>
+    </div>
+</div>    
