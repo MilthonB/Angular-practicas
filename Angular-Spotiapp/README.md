@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
 
+![](https://github.com/MilthonB/Angular-practicas/blob/master/Angular-Spotiapp/src/assets/img/banner-ico.png?raw=true)
+
+# Pantallas
+![](https://github.com/MilthonB/Angular-practicas/blob/master/Angular-Spotiapp/src/assets/img/pnt1.png?raw=true)
+![](https://github.com/MilthonB/Angular-practicas/blob/master/Angular-Spotiapp/src/assets/img/pnt2.png?raw=true)
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
