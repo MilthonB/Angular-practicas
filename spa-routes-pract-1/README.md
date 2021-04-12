@@ -4,8 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 # Screenshot
-![]()
 ![](https://github.com/MilthonB/Angular-practicas/tree/master/spa-routes-pract-1/src/assets/img/ptn1.png?raw=true)
+
+![](https://github.com/MilthonB/Angular-practicas/blob/master/Angular-Spotiapp/src/assets/img/pnt2.png?raw=true)
+
 
 ## Development server
 
