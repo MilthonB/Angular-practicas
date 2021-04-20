@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -7,9 +8,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReactiveComponent implements OnInit {
 
-  constructor() { }
+  forma: FormGroup;
+
+  constructor( private fb: FormBuilder) { 
+
+    this.crearFormulario();
+
+  }
 
   ngOnInit(): void {
   }
+
+
+  crearFormulario(){
+    //nombre:['valor que deseas establecer como defecto',
+    //'validadores sincronos',
+    //'valores asincronos ]
+
+    //validadores sincronos que se pueden hacer de inmediatamente 
+    //y que no requieren respuesta de algun servicio 
+
+
+
+    //nombre: ['',],
+      this.forma = this.fb.group({
+        nombre  : ['', [Validators.required, Validators.minLength(5)]],
+        apellido: ['', [Validators.required, Validators.minLength(5)]],
+        correo  : ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"), Validators.required]
+      ],
+      });
+      
+  }
+
+
+  guardar(){
+    console.log(this.forma);
+  }
+
+
+
 
 }
