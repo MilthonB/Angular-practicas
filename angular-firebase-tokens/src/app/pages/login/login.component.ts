@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +26,11 @@ export class LoginComponent implements OnInit {
   login( form: NgForm){
 
     if( form.invalid ){ return; }
+
+
+   
+
+
     this.auth.logIn(this.usuario)
         .subscribe( resp => {
           console.log(resp);
