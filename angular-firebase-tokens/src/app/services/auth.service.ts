@@ -8,10 +8,14 @@ import { UsuarioModel } from '../models/usuario.model';
 export class AuthService {
 
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:'
+<<<<<<< HEAD
   private apiKey = 'AIzaSyCKTXgXMV8L9jjpphd5HWv1G296J_0cOLc'
 
   userToken: string;
 
+=======
+  private apiKey = 'APIWEB FIREBASE'
+>>>>>>> 871132b57f15c516aa98836ac5422efbca2e2ea7
   //crear nuevos usuarios
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
 
