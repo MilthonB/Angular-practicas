@@ -18,8 +18,7 @@ import { HeroesRoutingModule } from './heroes-routing.module';
     ListadoComponent
   ],
   imports: [
-    CommonModule
-  ],exports:[
+    CommonModule,
     HeroesRoutingModule
   ]
 })
