@@ -1,0 +1,14 @@
+<h1> ¿Está seguro? </h1>
+
+<mat-divider></mat-divider>
+<p>
+    Esta a punto de borar a {{ heroe.superhero }}
+    <br>
+    ¿Deseas continuar?
+</p>
+
+
+<div>
+    <button mat-button (click)="borrar()" color="warn"> Sí, borrar! </button>
+    <button mat-button (click)="cerrar()" color="info"> Cancelar </button>
+</div>
