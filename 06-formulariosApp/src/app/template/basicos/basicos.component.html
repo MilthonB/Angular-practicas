@@ -12,7 +12,7 @@
                 <div class="col-sm-9">
                     <input type="text"
                             class="form-control"
-                            ngModel
+                            [ngModel]="initForm.producto"
                             name="producto"
                             required
                             minlength="3"
@@ -27,7 +27,7 @@
                 <div class="col-sm-9">
                     <input type="number"
                             class="form-control"
-                            ngModel
+                            [ngModel]="initForm.precio"
                             name="precio"
                             required
                             placeholder="Nombre del producto">
@@ -42,13 +42,12 @@
                 <div class="col-sm-9">
                     <input type="number"
                             class="form-control"
-                            ngModel
+                            [ngModel]="initForm.exitencia"
                             name="exitencia"
                             customMin
                             [minimo]="0"
                             placeholder="Nombre del producto"
                             required>
-                    
                 </div>
             </div>
 
