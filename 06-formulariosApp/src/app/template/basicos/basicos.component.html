@@ -44,7 +44,10 @@
                             class="form-control"
                             ngModel
                             name="exitencia"
-                            placeholder="Nombre del producto">
+                            customMin
+                            [minimo]="0"
+                            placeholder="Nombre del producto"
+                            required>
                     
                 </div>
             </div>
