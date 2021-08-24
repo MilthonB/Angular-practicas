@@ -4,13 +4,14 @@
 
 <div class="row">
     <div class="col">
-        <form  autocomplete="off">
+        <form  autocomplete="off" [formGroup]="miFormulario" >
             <!-- campo de producto -->
             <div class="mt-3 row">
                 <label class="col-sm-3 col-form-label">Prodcto</label>
                 <div class="col-sm-9">
                     <input type="text"
                             class="form-control"
+                            formControlName="nombre"
                             placeholder="Nombre del producto">
                     <span class="from-text text-danger"
                           > Debe de ser de 3 letras</span>
@@ -22,6 +23,7 @@
                 <div class="col-sm-9">
                     <input type="number"
                             class="form-control"
+                            formControlName="precio"
                             placeholder="Nombre del producto">
                     <span class="from-text text-danger"
                           > El precio debe ser 0 o mayor</span>
@@ -34,6 +36,7 @@
                 <div class="col-sm-9">
                     <input type="number"
                             class="form-control"
+                            formControlName="exstencia"
                             placeholder="Nombre del producto">
                 </div>
             </div>
@@ -53,17 +56,17 @@
 
 <div class="row">
     <div class="col">
-        <!-- <span>Valid</span>
-        <pre> {{ miformulatio.valid }} </pre>
+        <span>Valid</span>
+        <pre> {{ miFormulario.valid }} </pre>
 
         
         <span>Touched</span>
-        <pre> {{ miformulatio.touched | json}} </pre>
+        <pre> {{ miFormulario.touched | json}} </pre>
         
         <span>Prestin</span>
-        <pre> {{ miformulatio.pristine | json}} </pre>
+        <pre> {{ miFormulario.pristine | json}} </pre>
 
         <span>Value</span>
-        <pre> {{ miformulatio.value | json}} </pre> -->
+        <pre> {{ miFormulario.value | json}} </pre>
     </div>
 </div>
