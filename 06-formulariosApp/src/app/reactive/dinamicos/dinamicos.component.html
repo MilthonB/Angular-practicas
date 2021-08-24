@@ -1,1 +1,69 @@
-<p>dinamicos works!</p>
+<h2>Reactivos: <small> Dinámicos</small> </h2>
+<hr>
+
+
+<form autocomplete="off" >
+
+    <!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Personaje </label>
+        <div class="col-sm-9">
+            <input class="form-control" type="text" 
+                placeholder="Nombre de la persona">
+            <span class="form-text text-danger" >
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+
+    <!-- Agregar -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Agregar </label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control" 
+                type="text" 
+                placeholder="Agregar juego favorito">
+
+                <button class="btn btn-success " 
+                type="button">
+                    Agregar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Lista de juegos favoritos -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Nombre </label>
+        <div class="col-sm-9">
+            <div class="input-group mb-1" >
+                <input class="form-control mb-1" 
+                    type="text">
+                <button class="btn btn-success " 
+                        type="button">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="mb-3 row">
+        <div class="col-sm-9">
+            <button class="btn btn-danger " type="button">
+                Agregar
+            </button>
+        </div>
+    </div>
+
+
+</form>
+
+
+<!-- <span>Persona</span>
+<pre>{{ persona | json }} </pre> -->
