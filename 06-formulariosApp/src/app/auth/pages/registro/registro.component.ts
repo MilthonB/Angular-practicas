@@ -15,6 +15,10 @@ export class RegistroComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.pattern( this.sv.nombreApellidoPattern )]],
     email: ['', [Validators.required, Validators.pattern( this.sv.emailPattern )]],
     username: ['', [Validators.required, this.sv.noPuedeSerTonto]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    password2: ['', [Validators.required]],
+  },{
+    validators: [ this.sv.camposIguales('password','password2') ]
   })
 
 
