@@ -49,6 +49,17 @@ export class SidemenuComponent implements OnInit {
     }
   ]
 
+  Validadores: MenuItem[] = [
+    {
+      texto: 'Registro',
+      ruta: './auth/registro'
+    },
+    {
+      texto: 'Login',
+      ruta: './auth/login'
+    }
+  ]
+
   
   constructor() { }
 
