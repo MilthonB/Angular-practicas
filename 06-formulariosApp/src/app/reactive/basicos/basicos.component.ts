@@ -24,6 +24,10 @@ export class BasicosComponent implements OnInit {
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.miFormulario.reset({
+      nombre:'rtx 4080ti',
+      precio: 1600,
+    })
   }
 
 
@@ -33,7 +37,15 @@ export class BasicosComponent implements OnInit {
   }
 
   guardar(){
-    
+
+    if( this.miFormulario.invalid ){
+      this.miFormulario.markAllAsTouched();
+      return
+    }
+
+    this.miFormulario.reset();
+
+
   }
 
 }
