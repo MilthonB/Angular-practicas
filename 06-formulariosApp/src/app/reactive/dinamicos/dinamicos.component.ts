@@ -1,6 +1,6 @@
 import { FormattedError } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, Validator, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, Validator, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -19,6 +19,8 @@ export class DinamicosComponent implements OnInit {
     ], Validators.required )
   });
 
+  nuevoFavorito : FormControl = this.fb.control('', Validators.required);
+
 
   constructor( private fb: FormBuilder ) { }
 
@@ -34,6 +36,19 @@ export class DinamicosComponent implements OnInit {
            && this.miFormulario.controls[campo].errors
   }
 
+  agregarFavorito(){
+    
+    if( this.nuevoFavorito.invalid ){return}
+
+    this.favoritosArr.push( this.fb.control( this.nuevoFavorito.value, Validators.required ) );
+
+    this.nuevoFavorito.reset();
+
+  }
+
+  borrar( index: number ){
+    this.favoritosArr.removeAt( index )
+  }
 
   guardar(){
     
