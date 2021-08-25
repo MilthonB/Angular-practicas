@@ -14,13 +14,16 @@ import { switchMap,tap } from 'rxjs/operators';
 export class SelectorPaisesComponent implements OnInit {
 
 
-  regiones: string[] = [];
-  paises: PaisSmall[] = [];
+  regiones : string[] = [];
+  paises   : PaisSmall[] = [];
+  fronteras: string[] = [];
+
 
   miFormulario: FormGroup = this.fb.group(
     {
       region: ['',Validators.required],
-      pais: ['',Validators.required]
+      pais: ['',Validators.required],
+      frontera: ['',Validators.required],
     }
   );
 
@@ -45,11 +48,21 @@ export class SelectorPaisesComponent implements OnInit {
             return this.paisesService.getPaisesPorRegion(region)
           })
         ).subscribe( paises => {
-            console.log(paises);
+            console.log('paises',paises);
             this.paises = paises;
         })
-                     
-
+                 
+    this.miFormulario.get('pais')?.valueChanges
+        .pipe(
+          tap((_) => {
+            this.fronteras = ['-- Seleccione el país fronterizo --'];
+            this.miFormulario.get('frontera')?.reset();
+          }),
+          switchMap( codigo => this.paisesService.getPaisPorCodigo(codigo))
+        ).subscribe( pais => {
+          console.log(pais)
+          this.fronteras = pais?.borders || [];
+        })  
   }
 
 
