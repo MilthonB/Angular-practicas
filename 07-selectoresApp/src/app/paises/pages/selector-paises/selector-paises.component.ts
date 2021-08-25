@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-selector-paises',
@@ -8,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectorPaisesComponent implements OnInit {
 
-  constructor() { }
+  miFormulario: FormGroup = this.fb.group(
+    {
+      region: ['',Validators.required]
+    }
+  );
+
+
+  constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
   }

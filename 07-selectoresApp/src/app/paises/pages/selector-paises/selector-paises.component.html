@@ -1,1 +1,22 @@
-<p>selector-paises works!</p>
+<h1 class="mt-5"> Selector anidados</h1>
+<hr>
+
+
+<form [formGroup]="miFormulario" >
+
+    <div class="row">
+        <div class="col">
+            <label class="form-label">Continentes</label>
+            <select class="form-control"
+                    formControlName="region">
+                <option value=""> -- Seleccione Contienente -- </option>
+            </select>
+        </div>
+    </div>
+
+</form>
+
+<h3>Formulario</h3>
+<pre> {{ miFormulario.valid }} </pre>
+<pre> {{ miFormulario.value |json }} </pre>
+
