@@ -31,8 +31,16 @@
                             formControlName="email"
                             placeholder="Email del usuario">
                     <span class="form-text text-danger"
-                    *ngIf="campoNoValido('email')">
+                    *ngIf="emailRequired()">
                         El correo es obligatorio    
+                    </span>  
+                    <span class="form-text text-danger"
+                    *ngIf="emailFormato()">
+                        Tiene que tener formato de correo    
+                    </span>  
+                    <span class="form-text text-danger"
+                    *ngIf="emailTomado()">
+                        Ese correo ya fue tomado    
                     </span>          
                 </div>
             </div>
@@ -80,7 +88,8 @@
                     <span class="form-text text-danger"
                           *ngIf="campoNoValido('password2')">
                         Las contraseñas debe de ser iguales
-                    </span>          
+                    </span> 
+                             
                 </div>
             </div>
 
