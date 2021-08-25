@@ -48,8 +48,8 @@
                     formControlName="frontera">
                 <option value=""> -- Seleccione el país fronterizo -- </option>
                 <option *ngFor="let frontera of fronteras"
-                        [value]="frontera"> 
-                    {{ frontera }}
+                        [value]="frontera.alpha3Code"> 
+                    {{ frontera.name }}
                 </option>
             </select>
         </div>

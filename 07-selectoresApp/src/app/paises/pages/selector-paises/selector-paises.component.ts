@@ -16,7 +16,8 @@ export class SelectorPaisesComponent implements OnInit {
 
   regiones : string[] = [];
   paises   : PaisSmall[] = [];
-  fronteras: string[] = [];
+  // fronteras: string[] = [];
+  fronteras: PaisSmall[] = [];
 
   cargando: boolean = false;
 
@@ -59,14 +60,15 @@ export class SelectorPaisesComponent implements OnInit {
         .pipe(
           tap((_) => {
             this.cargando = true;
-            this.fronteras = ['-- Seleccione el país fronterizo --'];
             this.miFormulario.get('frontera')?.reset();
           }),
-          switchMap( codigo => this.paisesService.getPaisPorCodigo(codigo))
-        ).subscribe( pais => {
+          switchMap( codigo => this.paisesService.getPaisPorCodigo(codigo)),
+          switchMap( pais => this.paisesService.getPaisesPorCodigos(pais?.borders!))
+        ).subscribe( paises => {
           this.cargando = false;
-          console.log(pais)
-          this.fronteras = pais?.borders || [];
+          console.log(paises)
+          this.fronteras = paises;
+          // this.fronteras = pais?.borders || [];
         })  
   }
 
