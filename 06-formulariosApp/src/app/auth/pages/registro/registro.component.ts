@@ -34,26 +34,24 @@ export class RegistroComponent implements OnInit {
     })
   }
 
+  get erroresEmail() {
+    const errors =  this.miFormulario.get('email')?.errors;
+    if( errors?.required ){
+      return 'El correo es obligatorio'
+    }else if( errors?.pattern ) {
+      return 'Tiene que tener formato de correo'
+    }else if( errors?.emailTomado ){
+      return 'Ese correo ya fue tomado'
+    }
+    return ''
+  }
+
   campoNoValido( campo: string ){
     return this.miFormulario.get(campo)?.invalid 
            && this.miFormulario.get(campo)?.touched
   }
 
-  emailRequired(){
-    return this.miFormulario.get('email')?.errors?.required 
-           && this.miFormulario.get('email')?.touched
-  }
 
-
-  emailFormato(){
-    return this.miFormulario.get('email')?.errors?.pattern 
-           && this.miFormulario.get('email')?.touched
-  }
-
-  emailTomado(){
-    return this.miFormulario.get('email')?.errors?.emailTomado 
-           && this.miFormulario.get('email')?.touched
-  }
 
 
   submitFormulario(){
