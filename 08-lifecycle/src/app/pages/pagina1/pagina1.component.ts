@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pagina1',
@@ -11,6 +12,8 @@ OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit
 
 
   nombre: string = "MIlthon";
+  segundos: number = 0;
+  timeSubscription!: Subscription;
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,10 +36,16 @@ OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit
   }
   ngOnDestroy(): void {
     console.log('OnDestroy');
+    this.timeSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
     console.log('ONInit');
+
+    this.timeSubscription =  interval(1000).subscribe( i => {
+      console.log(i)
+      this.segundos = i;
+    } )
 
   }
 
