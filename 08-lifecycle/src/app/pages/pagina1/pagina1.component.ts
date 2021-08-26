@@ -9,6 +9,9 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
 export class Pagina1Component implements 
 OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
+
+  nombre: string = "MIlthon";
+
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('OnChanges');
@@ -37,6 +40,10 @@ OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit
 
   }
 
+
+  guardar(){
+
+  }
  
 
 }
