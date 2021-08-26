@@ -9,7 +9,19 @@ import * as mapboxgl from "mapbox-gl";
     .mapa-container{
       height: 100%;
       width: 100%;
-    }`
+    }
+    .list-group{
+        position: fixed;
+        top:20px;
+        right: 20px;
+        z-index: 99;
+    }
+
+    li{
+      cursor: pointer;
+    }
+
+    `
     
   ]
 })
@@ -42,11 +54,25 @@ export class MarcadoresComponent implements AfterViewInit {
     //   element: marketHatml
     // });
 
-    const market = new mapboxgl.Marker();
+    // const market = new mapboxgl.Marker();
 
-    market.setLngLat( this.center )
-          .addTo(this.mapa)
+    // market.setLngLat( this.center )
+    //       .addTo(this.mapa)
 
+
+  }
+
+  agregarMarket(){
+
+    const color = "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+
+
+    const nuevoMarket = new mapboxgl.Marker({
+      draggable: true,
+      color
+    })
+        .setLngLat(this.center)
+        .addTo(this.mapa)
 
   }
 
