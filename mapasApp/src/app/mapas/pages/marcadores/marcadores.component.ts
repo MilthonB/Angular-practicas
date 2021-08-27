@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import * as mapboxgl from "mapbox-gl";
+import { Color } from '../../../../../../04-pipesApp/src/app/ventas/interfaces/ventas.interface';
 
 interface MarcadorColor {
   color: string;
-  market: mapboxgl.Marker
+  market?: mapboxgl.Marker
+  centro?: [number, number]
 }
 
 
@@ -67,6 +69,9 @@ export class MarcadoresComponent implements AfterViewInit {
     // market.setLngLat( this.center )
     //       .addTo(this.mapa)
 
+    this.leerLocalStorage();
+
+
 
   }
 
@@ -88,6 +93,12 @@ export class MarcadoresComponent implements AfterViewInit {
       market: nuevoMarket
     })
 
+    this.guardarLocalStorage()
+
+    nuevoMarket.on('dragend', () =>{
+      this.guardarLocalStorage();
+    })
+
   }
 
 
@@ -96,6 +107,69 @@ export class MarcadoresComponent implements AfterViewInit {
     this.mapa.flyTo({
       center: market.getLngLat()
     })
+
+  }
+
+  guardarLocalStorage(){
+
+    const listArr: MarcadorColor[] = []
+
+    this.listMarket.forEach( m => {
+
+      const color = m.color;
+      const { lng, lat }  = m.market!.getLngLat();
+
+      listArr.push({
+        color: color,
+        centro: [ lng, lat ]
+      })
+    })
+
+    localStorage.setItem('marcadores', JSON.stringify( listArr ))
+
+  }
+
+  leerLocalStorage(){
+
+    if(!localStorage.getItem('marcadores')){
+      return;
+    }
+
+    const nuevaListMarker = JSON.parse(localStorage.getItem('marcadores')!)
+
+    nuevaListMarker.forEach( (m: any) => {
+      
+      const newMarker = new mapboxgl.Marker({
+        color: m.color,
+        draggable: true
+      }).setLngLat( m.centro )
+        .addTo(this.mapa)
+
+      this.listMarket.push({
+        color: m.color,
+        market: newMarker
+      })
+
+
+      newMarker.on('dragend', () =>{
+        this.guardarLocalStorage();
+      })
+
+    });
+    
+
+
+    console.log(nuevaListMarker)
+
+
+  }
+
+  borrarMarcador( i: number ){
+
+    console.log('HOla ')
+    this.listMarket[i].market?.remove();
+    this.listMarket.splice(i,1);
+    this.guardarLocalStorage(); 
 
   }
 
