@@ -10,7 +10,7 @@ import * as mapboxgl from 'mapbox-gl';
       div{
         width: 100%;
         height: 150px;
-        margin: 0px
+        margin: 0px  
       }
     `
   ]
