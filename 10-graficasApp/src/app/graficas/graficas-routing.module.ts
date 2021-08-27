@@ -7,24 +7,29 @@ import { BarrasDonaHttpComponent } from './pages/barras-dona-http/barras-dona-ht
 
 const routes: Routes = [
   {
-    path: 'barra',
-    component: BarrasComponent
-  },
-  {
-    path: 'barras-dobles',
-    component: BarrasDobleComponent
-  },
-  {
-    path: 'dona',
-    component: BarrasDonaComponent 
-  },
-  {
-    path: 'dona-http',
-    component: BarrasDonaHttpComponent 
-  },
-  {
-    path: '**',
-    redirectTo: 'barra' 
+    path: '',
+    children:[
+      {
+        path: 'barra',
+        component: BarrasComponent
+      },
+      {
+        path: 'barras-dobles',
+        component: BarrasDobleComponent
+      },
+      {
+        path: 'dona',
+        component: BarrasDonaComponent 
+      },
+      {
+        path: 'dona-http',
+        component: BarrasDonaHttpComponent 
+      },
+      {
+        path: '**',
+        redirectTo: 'barra' 
+      }
+    ]
   }
 ];
 
