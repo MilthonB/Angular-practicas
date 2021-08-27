@@ -3,17 +3,19 @@
 
 <div class="row g-3 aling-item-center mb-3">
 
-    <form>
+    <form (ngSubmit)="guardar()" [formGroup]="miFormulario" >
         <div class="col-auto">
             <label class="col-form-label"> Nombre: </label>
         </div>
     
         <div class="col-auto">
-            <input class="form-control">
+            <input class="form-control"
+                   formControlName="nombre">
         </div>
     
         <div class="col-auto">
-            <span class="form-text">
+            <span class="form-text"
+                 *ngIf="tieneError('nombre')">
                 Este campo es requerido
             </span>
         </div>
@@ -28,3 +30,7 @@
     </form>
     
 </div>
+
+<h3 class="mt-5"> Formulario </h3>
+<pre>  Value {{ miFormulario.value  | json}} </pre>
+<pre>  Value {{ miFormulario.valid}} </pre>
