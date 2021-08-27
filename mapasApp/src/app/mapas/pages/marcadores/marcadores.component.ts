@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import * as mapboxgl from "mapbox-gl";
 
+interface MarcadorColor {
+  color: string;
+  market: mapboxgl.Marker
+}
+
+
 @Component({
   selector: 'app-marcadores',
   templateUrl: './marcadores.component.html',
@@ -22,7 +28,7 @@ import * as mapboxgl from "mapbox-gl";
     }
 
     `
-    
+
   ]
 })
 export class MarcadoresComponent implements AfterViewInit {
@@ -32,6 +38,8 @@ export class MarcadoresComponent implements AfterViewInit {
   mapa!: mapboxgl.Map;
   zoom: number = 15;
   center: [number, number] = [-109.96623886704991, 27.495515666607286];
+
+  listMarket: MarcadorColor[] = []
 
 
 
@@ -62,17 +70,32 @@ export class MarcadoresComponent implements AfterViewInit {
 
   }
 
-  agregarMarket(){
+  agregarMarket() {
 
-    const color = "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+    const color = "#xxxxxx".replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
 
 
     const nuevoMarket = new mapboxgl.Marker({
       draggable: true,
       color
     })
-        .setLngLat(this.center)
-        .addTo(this.mapa)
+      .setLngLat(this.center)
+      .addTo(this.mapa)
+
+
+    this.listMarket.push({
+      color,
+      market: nuevoMarket
+    })
+
+  }
+
+
+  irMarcador( market: mapboxgl.Marker ) {
+
+    this.mapa.flyTo({
+      center: market.getLngLat()
+    })
 
   }
 

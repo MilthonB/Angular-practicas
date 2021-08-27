@@ -1,12 +1,18 @@
 
 <ul class="list-group">
-    <li class="list-group-item list-group-item-info">
+    <li class="list-group-item list-group-item-info"
+        (click)="agregarMarket()">
         + Agregar
     </li>
     
     <li class="list-group-item"
-        (click)="agregarMarket()">
-        Market
+        *ngFor="let marcador of listMarket; let i = index"
+        (click)="irMarcador( marcador.market)"
+        [ngStyle]="{
+            'background-color': marcador.color
+            }
+        ">
+        Marcador {{ i + 1 }}
     </li>
 
     
