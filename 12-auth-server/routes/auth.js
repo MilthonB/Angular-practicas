@@ -1,30 +1,15 @@
-const { Router } = require('express')
-
+const { Router } = require('express');
+const ctr = require('../controllers/auth');
 
 const rutas = Router();
 
-rutas.post( '/', ( req, res ) => {
-    return res.json({
-        ok: true,
-        msj: 'Login'
-    });
-} );
+rutas.post( '/', ctr.loginUsuario);
 
 
-rutas.post( '/new', ( req, res ) => {
-    return res.json({
-        ok: true,
-        msj: 'Nuevo usuario'
-    });
-} );
+rutas.post( '/new', ctr.crearUsuario);
 
 
-rutas.get( '/renew', ( req, res ) => {
-    return res.json({
-        ok: true,
-        msj: 'Renew'
-    });
-} );
+rutas.get( '/renew', ctr.revalidarToken);
 
 
 module.exports = rutas;
