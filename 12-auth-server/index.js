@@ -1,19 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 
-
+// creacion de servidor/aplicacion de express
 const app = express();
 
+//CORS
+app.use( cors() )
 
+//Lectura y parseo de body
+app.use(express.json());
+
+// Delcaracion de sistemas de rutas
 app.use( '/api/auth', require('./routes/auth') );
-// app.get( '/', ( req, res ) => {
-//     res.json(
-//         {
-//             ok: true,
-//             msj: 'Todo salio bien',
-//             uid: 123
-//         }
-//     )
-// });
 
 
 app.listen( 4000, () => {
