@@ -10,16 +10,17 @@ export class ErrorMsgDirective implements OnInit {
   private _mensaje: string =' Este campo es reqierodo '
 
   @Input() set color (valor: string) {
+    this.setColor();
     this._color = valor;
   }
   
   @Input() set mensaje (valor: string){
+    this.setMensaje();
     this._mensaje = valor;
   } 
   
   constructor( private el: ElementRef<HTMLElement> ) { 
     this.htmlElement = el;
-    
   }
 
   ngOnInit(): void {
