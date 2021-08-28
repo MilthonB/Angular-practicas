@@ -18,6 +18,14 @@ export class ErrorMsgDirective implements OnInit {
     this.setMensaje();
     this._mensaje = valor;
   } 
+
+  @Input() set valido (valor: boolean){
+    if( valor ){
+      this.htmlElement.nativeElement.classList.add('hidden');
+    }else{
+      this.htmlElement.nativeElement.classList.remove('hidden');
+    }
+  } 
   
   constructor( private el: ElementRef<HTMLElement> ) { 
     this.htmlElement = el;
@@ -26,6 +34,7 @@ export class ErrorMsgDirective implements OnInit {
   ngOnInit(): void {
     this.setClass();
   }
+
 
   setClass(){
     this.htmlElement.nativeElement.classList.add("form-text");
