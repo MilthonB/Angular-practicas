@@ -15,17 +15,24 @@
     
         <div class="col-auto">
             <span error-msg
-                  color="red"
-                  mensaje="Debe de ingresar este campo"
+                  [color]="color"
+                  [mensaje]="mensaje"
                  *ngIf="tieneError('nombre')">
             </span>
         </div>
     
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-danger">
-                    Guardar
+                <button class="btn btn-danger"
+                        (click)="cambiarNombre()">
+                    cambiar nombre 
                 </button>
+
+                <button class="btn btn-danger"
+                        (click)="cambiarColor()">
+                   Cambiar color
+                </button>
+
             </div>
         </div>
     </form>

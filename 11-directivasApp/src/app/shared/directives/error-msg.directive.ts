@@ -6,31 +6,36 @@ import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 export class ErrorMsgDirective implements OnInit {
 
   htmlElement: ElementRef<HTMLElement>;
-  @Input() color: string = 'red';
-  @Input() mensaje: string = 'No hay nada';
-  
+  private _color: string = 'red';
+  private _mensaje: string =' Este campo es reqierodo '
 
+  @Input() set color (valor: string) {
+    this._color = valor;
+  }
+  
+  @Input() set mensaje (valor: string){
+    this._mensaje = valor;
+  } 
+  
   constructor( private el: ElementRef<HTMLElement> ) { 
     this.htmlElement = el;
     
   }
 
   ngOnInit(): void {
-    console.log('Directive-oninit')
-    this.setColor()
-    this.setMensaje()
+    this.setClass();
   }
 
-  setColor():void {
-
-    this.htmlElement.nativeElement.style.color = this.color
+  setClass(){
     this.htmlElement.nativeElement.classList.add("form-text");
-    
-
   }
 
-  setMensaje(): void{
-    this.htmlElement.nativeElement.innerText = this.mensaje;
+  setColor(){
+    this.htmlElement.nativeElement.style.color = this._color;
+  }
+
+  setMensaje(){
+    this.htmlElement.nativeElement.innerText = this._mensaje;
   }
 
 }
