@@ -3,15 +3,17 @@ const express = require('express');
 
 const app = express();
 
-app.get( '/', ( req, res ) => {
-    res.json(
-        {
-            ok: true,
-            msj: 'Todo salio bien',
-            uid: 123
-        }
-    )
-});
+
+app.use( '/api/auth', require('./routes/auth') );
+// app.get( '/', ( req, res ) => {
+//     res.json(
+//         {
+//             ok: true,
+//             msj: 'Todo salio bien',
+//             uid: 123
+//         }
+//     )
+// });
 
 
 app.listen( 4000, () => {
