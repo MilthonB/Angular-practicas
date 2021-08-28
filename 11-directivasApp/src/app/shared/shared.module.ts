@@ -11,6 +11,7 @@ import { CustomIfDirective } from './directives/custom-if.directive';
     CustomIfDirective
   ],
   exports:[
+    CustomIfDirective,
     ErrorMsgDirective
   ]
 })

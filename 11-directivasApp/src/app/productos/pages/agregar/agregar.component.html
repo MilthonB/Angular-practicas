@@ -42,3 +42,12 @@
 <h3 class="mt-5"> Formulario </h3>
 <pre>  Value {{ miFormulario.value  | json}} </pre>
 <pre>  Value {{ miFormulario.valid}} </pre>
+
+<div class="row mt-5"
+    *customIf="miFormulario.invalid">
+    <div class="col">
+        <div class="alert alert-primary">
+            Todo Ok!
+        </div>
+    </div>
+</div>
