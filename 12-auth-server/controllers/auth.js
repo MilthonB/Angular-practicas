@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const Usuario = require('../models/Usuario')
+const bcrypt = require('bcryptjs')
 
 
 const cuentasCTLR = {};
@@ -50,13 +51,16 @@ cuentasCTLR.crearUsuario = async ( req, res ) => {
         if( usuario ){
             return res.status(400).json({
                 ok: false,
-                msj: 'Ese email ta fue tomado'
+                msj: 'Ese email ya fue tomado'
             })
         }
 
         //crear usuario con el modelo
         const dbUsuer = new Usuario( req.body );
 
+        //Encriptación de la contraseña
+        const salt = bcrypt.genSaltSync();
+        dbUsuer.password = bcrypt.hashSync(password,salt);
 
         //Crear usuario en la base de datos
         await dbUsuer.save();
