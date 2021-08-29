@@ -117,7 +117,7 @@ cuentasCTLR.crearUsuario = async (req, res) => {
 };
 
 cuentasCTLR.revalidarToken = async(req, res) => {
-
+ 
     const { uid, name } = req;
 
     const token = await generarJWT(uid, name)
