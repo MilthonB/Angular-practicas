@@ -7,13 +7,48 @@ const { generarJWT } = require('../helpers/jwt')
 const cuentasCTLR = {};
 
 
-cuentasCTLR.loginUsuario = ( req, res ) => {
+cuentasCTLR.loginUsuario = async( req, res ) => {
 
    
 
-    const { email,name,password } = req.body;
+    const { email,password } = req.body;
+
+
 
     try {
+
+        const dbUser = await Usuario.findOne({email})
+
+        if( !dbUser ){
+            return res.status(400).json({
+                ok: false,
+                msg:'Credenciales no son validaz'
+            });
+        }
+
+        // COnfirmar si el password hace match
+
+        const validPassword = bcrypt.compareSync( password, dbUser.password )
+
+        if( !validPassword ){
+            return res.status(400).json({
+                ok: false,
+                msj: 'Verifique su contraseña'
+            });
+        }
+
+        // Generar el JWT
+
+        const token = await generarJWT( dbUser.id, dbUser.name );
+
+
+        //respuesta del servicio
+        return res.json({
+            ok: true,
+            uid: dbUser.id,
+            name: dbUser.name,
+            token
+        })
 
     } catch (error) {
         console.log(error)
@@ -25,14 +60,7 @@ cuentasCTLR.loginUsuario = ( req, res ) => {
 
 
     
-    //Encriptacion de la constraseña
     
-    //Generar el json web token
-
-    //crear usuario de la base de datos
-
-    
-    //Generar la respuesta Exitosa
     
     
     
