@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const Usuario = require('../models/Usuario')
 
 
 const cuentasCTLR = {};
@@ -8,22 +9,72 @@ cuentasCTLR.loginUsuario = ( req, res ) => {
 
    
 
-    const { email,usuario,password } = req.body;
-    console.log(email,usuario,password)
+    const { email,name,password } = req.body;
 
+    try {
 
-    return res.json({
-        ok: true,
-        msj: 'Login'
-    });
-}; 
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msj: 'Porfavor hable con el administracion'
+        });
+    }
 
-cuentasCTLR.crearUsuario = ( req, res ) => {
 
     
+    //Encriptacion de la constraseña
+    
+    //Generar el json web token
 
-    const { email,password } = req.body;
-    console.log(email,password)
+    //crear usuario de la base de datos
+
+    
+    //Generar la respuesta Exitosa
+    
+    
+    
+}; 
+
+cuentasCTLR.crearUsuario = async ( req, res ) => {
+    
+    
+    
+    const { email,name,password } = req.body;
+    
+    try {
+        
+        //Verificar si no existe un correo igual
+        const usuario = await Usuario.findOne({email});
+
+        if( usuario ){
+            return res.status(400).json({
+                ok: false,
+                msj: 'Ese email ta fue tomado'
+            })
+        }
+
+        //crear usuario con el modelo
+        const dbUsuer = new Usuario( req.body );
+
+
+        //Crear usuario en la base de datos
+        await dbUsuer.save();
+
+        return res.status(201).json({
+            ok: true,
+            uid: dbUsuer.id,
+            name,
+        });
+
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msj: 'Porfavor hable con el administracion'
+        });
+    }
 
 
     return res.json({

@@ -14,7 +14,7 @@ rutas.post( '/',[
 
 //Crear Usuario
 rutas.post( '/new',[
-    check('nombre','El campo nombre es obligatorio').not().isEmpty(),
+    check('name','El campo nombre es obligatorio').not().isEmpty(),
     check('email','El email es obligatorio o no se reconcoe').isEmail(),
     check('password','La contraseña no cumpleto con los parametros requeridos').isLength({min:6}),
     validarCampos
