@@ -7,30 +7,30 @@ const { generarJWT } = require('../helpers/jwt')
 const cuentasCTLR = {};
 
 
-cuentasCTLR.loginUsuario = async( req, res ) => {
+cuentasCTLR.loginUsuario = async (req, res) => {
 
-   
 
-    const { email,password } = req.body;
+
+    const { email, password } = req.body;
 
 
 
     try {
 
-        const dbUser = await Usuario.findOne({email})
+        const dbUser = await Usuario.findOne({ email })
 
-        if( !dbUser ){
+        if (!dbUser) {
             return res.status(400).json({
                 ok: false,
-                msg:'Credenciales no son validaz'
+                msg: 'Credenciales no son validaz'
             });
         }
 
         // COnfirmar si el password hace match
 
-        const validPassword = bcrypt.compareSync( password, dbUser.password )
+        const validPassword = bcrypt.compareSync(password, dbUser.password)
 
-        if( !validPassword ){
+        if (!validPassword) {
             return res.status(400).json({
                 ok: false,
                 msj: 'Verifique su contraseña'
@@ -39,7 +39,7 @@ cuentasCTLR.loginUsuario = async( req, res ) => {
 
         // Generar el JWT
 
-        const token = await generarJWT( dbUser.id, dbUser.name );
+        const token = await generarJWT(dbUser.id, dbUser.name);
 
 
         //respuesta del servicio
@@ -59,25 +59,25 @@ cuentasCTLR.loginUsuario = async( req, res ) => {
     }
 
 
-    
-    
-    
-    
-    
-}; 
 
-cuentasCTLR.crearUsuario = async ( req, res ) => {
-    
-    
-    
-    const { email,name,password } = req.body;
-    
+
+
+
+
+};
+
+cuentasCTLR.crearUsuario = async (req, res) => {
+
+
+
+    const { email, name, password } = req.body;
+
     try {
-        
-        //Verificar si no existe un correo igual
-        const usuario = await Usuario.findOne({email});
 
-        if( usuario ){
+        //Verificar si no existe un correo igual
+        const usuario = await Usuario.findOne({ email });
+
+        if (usuario) {
             return res.status(400).json({
                 ok: false,
                 msj: 'Ese email ya fue tomado'
@@ -85,14 +85,14 @@ cuentasCTLR.crearUsuario = async ( req, res ) => {
         }
 
         //crear usuario con el modelo
-        const dbUsuer = new Usuario( req.body );
+        const dbUsuer = new Usuario(req.body);
 
         //Encriptación de la contraseña
         const salt = bcrypt.genSaltSync();
-        dbUsuer.password = bcrypt.hashSync(password,salt);
+        dbUsuer.password = bcrypt.hashSync(password, salt);
 
         //Generar el jwt
-        const token = await generarJWT( dbUsuer.id, name )
+        const token = await generarJWT(dbUsuer.id, name)
 
         //Crear usuario en la base de datos
         await dbUsuer.save();
@@ -114,17 +114,24 @@ cuentasCTLR.crearUsuario = async ( req, res ) => {
     }
 
 
-    return res.json({
-        ok: true,
-        msj: 'Nuevo usuario'
-    });
-}; 
+};
 
-cuentasCTLR.revalidarToken = ( req, res ) => {
+cuentasCTLR.revalidarToken = async(req, res) => {
+
+    const { uid, name } = req;
+
+    const token = await generarJWT(uid, name)
+
+    
+
     return res.json({
         ok: true,
-        msj: 'Renew'
+        uid,
+        name,
+        token
     });
+
+
 };
 
 
