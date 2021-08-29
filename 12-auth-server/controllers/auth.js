@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const Usuario = require('../models/Usuario')
 const bcrypt = require('bcryptjs')
+const { generarJWT } = require('../helpers/jwt')
 
 
 const cuentasCTLR = {};
@@ -62,6 +63,9 @@ cuentasCTLR.crearUsuario = async ( req, res ) => {
         const salt = bcrypt.genSaltSync();
         dbUsuer.password = bcrypt.hashSync(password,salt);
 
+        //Generar el jwt
+        const token = await generarJWT( dbUsuer.id, name )
+
         //Crear usuario en la base de datos
         await dbUsuer.save();
 
@@ -69,6 +73,7 @@ cuentasCTLR.crearUsuario = async ( req, res ) => {
             ok: true,
             uid: dbUsuer.id,
             name,
+            token
         });
 
 
