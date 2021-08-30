@@ -15,42 +15,53 @@ export class AuthService {
 
   private _baseUrl: string = environment.baseUrl;
   private _usuario!: Usuario;
- 
-  constructor( private http: HttpClient ) { }
 
-  get Usuario(){
+  constructor(private http: HttpClient) { }
+
+  get Usuario() {
     return { ...this._usuario }
   }
 
-  login( email: string, password: string ){
+  login(email: string, password: string) {
 
-    const url : string = ` ${ this._baseUrl }auth/ `;
+    const url: string = ` ${this._baseUrl}auth/ `;
     const body = { email, password };
 
-    return this.http.post<AuthResponse>( url, body )
-               .pipe(
-                 tap( resp => {
-                    if(resp.ok){
-                      localStorage.setItem( 'token', resp.token! );
-                      this._usuario = {
-                        uid: resp.uid!,
-                        name: resp.name!
-                      }
-                    }
-                 } ),
-                 map( resp => resp.ok ),
-                 catchError( err => of(err.error.msg) )
-               );
+    return this.http.post<AuthResponse>(url, body)
+      .pipe(
+        tap(resp => {
+          if (resp.ok) {
+            localStorage.setItem('token', resp.token!);
+            this._usuario = {
+              uid: resp.uid!,
+              name: resp.name!
+            }
+          }
+        }),
+        map(resp => resp.ok),
+        catchError(err => of(err.error.msg))
+      );
 
   }
 
-  validarToken(){
+  validarToken(): Observable<boolean> {
 
-    const url : string = ` ${ this._baseUrl }auth/renew `;
+    const url: string = ` ${this._baseUrl}auth/renew `;
     const headers = new HttpHeaders()
-    .set('x-token', localStorage.getItem('token') || '');
+      .set('x-token', localStorage.getItem('token') || '');
 
-    this.http.get( url,{ headers } );
+    return this.http.get<AuthResponse>(url, { headers })
+      .pipe(
+        map(resp => {
+          localStorage.setItem('token', resp.token!);
+          this._usuario = {
+            uid: resp.uid!,
+            name: resp.name!
+          }
+          return resp.ok;
+        }),
+        catchError(err => of(false))
+      );
 
   }
 }
