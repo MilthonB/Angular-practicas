@@ -33,7 +33,7 @@ cuentasCTLR.loginUsuario = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msj: 'Verifique su contraseña'
+                msg: 'Verifique su contraseña'
             });
         }
 
@@ -54,7 +54,7 @@ cuentasCTLR.loginUsuario = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             ok: false,
-            msj: 'Porfavor hable con el administracion'
+            msg: 'Porfavor hable con el administracion'
         });
     }
 
@@ -80,7 +80,7 @@ cuentasCTLR.crearUsuario = async (req, res) => {
         if (usuario) {
             return res.status(400).json({
                 ok: false,
-                msj: 'Ese email ya fue tomado'
+                msg: 'Ese email ya fue tomado'
             })
         }
 
@@ -109,7 +109,7 @@ cuentasCTLR.crearUsuario = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             ok: false,
-            msj: 'Porfavor hable con el administracion'
+            msg: 'Porfavor hable con el administracion'
         });
     }
 
