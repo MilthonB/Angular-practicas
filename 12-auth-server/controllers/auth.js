@@ -47,6 +47,7 @@ cuentasCTLR.loginUsuario = async (req, res) => {
             ok: true,
             uid: dbUser.id,
             name: dbUser.name,
+            email,
             token
         })
 
@@ -101,6 +102,7 @@ cuentasCTLR.crearUsuario = async (req, res) => {
             ok: true,
             uid: dbUsuer.id,
             name,
+            email,
             token
         });
 
@@ -120,14 +122,16 @@ cuentasCTLR.revalidarToken = async(req, res) => {
  
     const { uid, name } = req;
 
+    const dbUser = await Usuario.findById(uid);
+
     const token = await generarJWT(uid, name)
 
     
-
     return res.json({
         ok: true,
         uid,
         name,
+        email: dbUser.email,
         token
     });
 

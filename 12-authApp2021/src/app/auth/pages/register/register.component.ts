@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,13 +19,22 @@ export class RegisterComponent implements OnInit {
   })
 
   constructor( private fbuild: FormBuilder,
-              private router: Router ) { }
+              private router: Router,
+              private authServices: AuthService ) { }
 
   ngOnInit(): void {
   }
 
   registrar(){
-    this.router.navigateByUrl('/dashboard')
+    const { name, email, password } = this.miFormulario.value;
+    this.authServices.registro( name, email, password )
+        .subscribe( resp => {
+          if( resp === true ){
+            this.router.navigateByUrl('/dashboard')
+          }else{
+            Swal.fire('Error',resp,'error');
+          }
+        });
 
   }
 
